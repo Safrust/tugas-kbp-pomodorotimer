@@ -42,8 +42,8 @@ function updateTimer() {
           );
           isStudyTime = !isStudyTime;
           timeLeft = isStudyTime ? studyTime : breakTime;
-          startTimer();
-        }, 1000); // Delay alert by 1 second to allow alarm to play
+          startTimer(); // Mulai timer lagi setelah waktu habis
+        }, 1000); // Tunda alert 1 detik untuk memungkinkan alarm berbunyi
       })
       .catch((error) => {
         console.error("Error playing sound:", error);
@@ -54,7 +54,7 @@ function updateTimer() {
         );
         isStudyTime = !isStudyTime;
         timeLeft = isStudyTime ? studyTime : breakTime;
-        startTimer();
+        startTimer(); // Mulai timer lagi setelah waktu habis
       });
   }
 }

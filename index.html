@@ -9,96 +9,146 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <style>
+      /* Kustom CSS */
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      h1,
+      h2 {
+        text-align: center;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .controls button {
+        transition: transform 0.2s ease-in-out;
+      }
+
+      .controls button:hover {
+        transform: scale(1.1);
+      }
+
+      .spotify iframe {
+        border-radius: 15px;
+      }
+    </style>
   </head>
-  <body>
-    <div class="container mx-auto p-4">
-      <h1 class="text-3xl font-bold mb-4">
+  <body class="bg-gray-100 text-gray-800">
+    <div class="container mx-auto p-6 bg-white rounded-lg shadow-lg">
+      <h1 class="text-4xl font-extrabold text-center mb-6 text-blue-600">
         Website Pendukung Kegiatan Belajar
       </h1>
 
       <audio id="alarm-sound" src="alarm.mp3" preload="auto"></audio>
-      
-      <!-- Pomodoro Timer -->
-      <section class="pomodoro mb-8">
-        <h2 class="text-2xl font-semibold mb-4">Pomodoro Timer</h2>
-        <div class="settings bg-gray-100 p-4 rounded-lg shadow-md">
-          <div class="setting-item mb-4">
-            <label for="study-time" class="block text-gray-700 font-semibold mb-2">
-              Waktu Belajar (menit):
-            </label>
-            <input
-              type="number"
-              id="study-time"
-              value="25"
-              min="1"
-              class="w-full p-2 border border-gray-300 rounded-md"
-            />
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Pomodoro Timer -->
+        <section class="pomodoro col-span-2 mb-8">
+          <h2 class="text-3xl font-semibold mb-4 text-blue-500">
+            Pomodoro Timer
+          </h2>
+          <div class="settings bg-gray-100 p-6 rounded-lg shadow-md">
+            <div class="setting-item mb-4">
+              <label
+                for="study-time"
+                class="block text-gray-700 font-semibold mb-2"
+              >
+                Waktu Belajar (menit):
+              </label>
+              <input
+                type="number"
+                id="study-time"
+                value="25"
+                min="1"
+                class="w-full p-3 border border-gray-300 rounded-md"
+              />
+            </div>
+            <div class="setting-item">
+              <label
+                for="break-time"
+                class="block text-gray-700 font-semibold mb-2"
+              >
+                Waktu Istirahat (menit):
+              </label>
+              <input
+                type="number"
+                id="break-time"
+                value="5"
+                min="1"
+                class="w-full p-3 border border-gray-300 rounded-md"
+              />
+            </div>
           </div>
-          <div class="setting-item">
-            <label for="break-time" class="block text-gray-700 font-semibold mb-2">
-              Waktu Istirahat (menit):
-            </label>
-            <input
-              type="number"
-              id="break-time"
-              value="5"
-              min="1"
-              class="w-full p-2 border border-gray-300 rounded-md"
-            />
+          <div
+            id="timer"
+            class="text-5xl font-mono text-center my-6 text-blue-600"
+          >
+            <span id="minutes">25</span>:<span id="seconds">00</span>
           </div>
-        </div>
-        <div id="timer" class="text-4xl font-mono text-center my-4">
-          <span id="minutes">25</span>:<span id="seconds">00</span>
-        </div>
-        <div class="controls text-center">
-          <button
-            class="bg-blue-500 text-white px-4 py-2 rounded-md mr-2"
-            onclick="startTimer()"
-          >
-            Mulai
-          </button>
-          <button
-            class="bg-red-500 text-white px-4 py-2 rounded-md"
-            onclick="resetTimer()"
-          >
-            Reset
-          </button>
-        </div>
-      </section>
+          <div class="controls text-center">
+            <button
+              class="bg-blue-500 text-white px-6 py-3 rounded-md mr-2 hover:bg-blue-600"
+              onclick="startTimer()"
+            >
+              Mulai
+            </button>
+            <button
+              class="bg-red-500 text-white px-6 py-3 rounded-md hover:bg-red-600"
+              onclick="resetTimer()"
+            >
+              Reset
+            </button>
+          </div>
+        </section>
+
+        <!-- Spotify Embed -->
+        <section class="spotify mb-8 lg:mb-0">
+          <h2 class="text-3xl font-semibold mb-4 text-green-500">
+            Musik untuk Belajar
+          </h2>
+          <iframe
+            src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M"
+            width="100%"
+            height="380"
+            frameborder="0"
+            allowtransparency="true"
+            allow="encrypted-media"
+            class="rounded-lg shadow-md"
+          ></iframe>
+          <div class="text-center mt-6">
+            <p class="text-gray-600 text-lg">
+              Untuk mendengarkan lagu penuh, silakan login ke Spotify.
+            </p>
+            <a
+              href="https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M"
+              target="_blank"
+              class="bg-green-500 text-white px-8 py-3 rounded-full inline-block mt-4 hover:bg-green-600 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 shadow-lg"
+            >
+              Login dan Dengarkan di Spotify
+            </a>
+          </div>
+        </section>
+      </div>
 
       <!-- To-Do List -->
-      <section class="todo">
-        <h2 class="text-2xl font-semibold mb-4">To-Do List</h2>
+      <section class="todo mt-8">
+        <h2 class="text-3xl font-semibold mb-4 text-blue-500">To-Do List</h2>
         <div class="flex mb-4">
           <input
             type="text"
             id="task-input"
             placeholder="Tambahkan tugas..."
-            class="w-full p-2 border border-gray-300 rounded-md mr-2"
+            class="w-full p-3 border border-gray-300 rounded-md mr-2"
           />
           <button
-            class="bg-green-500 text-white px-4 py-2 rounded-md"
+            class="bg-green-500 text-white px-6 py-3 rounded-md hover:bg-green-600"
             onclick="addTask()"
           >
             Tambah
           </button>
         </div>
         <ul id="task-list" class="list-disc pl-5"></ul>
-      </section>
-      </div>
-
-      <!-- Spotify Embed -->
-      <section class="spotify mb-8">
-        <h2 class="text-2xl font-semibold mb-4">Musik untuk Belajar</h2>
-        <iframe
-          src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M"
-          width="100%"
-          height="380"
-          frameborder="0"
-          allowtransparency="true"
-          allow="encrypted-media"
-          class="rounded-lg shadow-md"
-        ></iframe>
       </section>
     </div>
     <script src="script.js"></script>
