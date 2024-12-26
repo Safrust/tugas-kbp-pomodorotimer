@@ -34,9 +34,18 @@
       }
     </style>
   </head>
-  <body class="bg-gray-100 text-gray-800">
+  <body
+    class="bg-gray-100 text-gray-800"
+    style="
+      background-image: url('bg-web.jpeg');
+      background-size: cover;
+      background-position: center;
+    "
+  >
     <div class="container mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <h1 class="text-4xl font-extrabold text-center mb-6 text-blue-600">
+      <h1
+        class="text-4xl font-extrabold text-center mb-3 bg-black text-white p-5 rounded-lg"
+      >
         Website Pendukung Kegiatan Belajar
       </h1>
 
@@ -45,7 +54,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Pomodoro Timer -->
         <section class="pomodoro col-span-2 mb-8">
-          <h2 class="text-3xl font-semibold mb-4 text-blue-500">
+          <h2 class="text-3xl font-semibold bg-black text-white p-4 rounded-lg">
             Pomodoro Timer
           </h2>
           <div class="settings bg-gray-100 p-6 rounded-lg shadow-md">
@@ -79,32 +88,38 @@
                 class="w-full p-3 border border-gray-300 rounded-md"
               />
             </div>
-          </div>
-          <div
-            id="timer"
-            class="text-5xl font-mono text-center my-6 text-blue-600"
-          >
-            <span id="minutes">25</span>:<span id="seconds">00</span>
-          </div>
-          <div class="controls text-center">
-            <button
-              class="bg-blue-500 text-white px-6 py-3 rounded-md mr-2 hover:bg-blue-600"
-              onclick="startTimer()"
+            <div
+              class="timer-controls-container flex flex-col items-center justify-center mx-auto p-6 rounded-lg"
             >
-              Mulai
-            </button>
-            <button
-              class="bg-red-500 text-white px-6 py-3 rounded-md hover:bg-red-600"
-              onclick="resetTimer()"
-            >
-              Reset
-            </button>
+              <div
+                id="timer"
+                class="text-5xl font-mono text-center my-6 text-white bg-black rounded-full w-48 h-48 flex items-center justify-center shadow-lg"
+              >
+                <span id="minutes">25</span>:<span id="seconds">00</span>
+              </div>
+              <div class="controls text-center mt-4 flex justify-center">
+                <button
+                  class="bg-blue-500 text-white px-6 py-3 rounded-full mr-2 hover:bg-blue-600"
+                  onclick="startTimer()"
+                >
+                  Mulai
+                </button>
+                <button
+                  class="bg-red-500 text-white px-6 py-3 rounded-full hover:bg-red-600"
+                  onclick="resetTimer()"
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
           </div>
         </section>
 
         <!-- Spotify Embed -->
         <section class="spotify mb-8 lg:mb-0">
-          <h2 class="text-3xl font-semibold mb-4 text-green-500">
+          <h2
+            class="text-3xl font-semibold mb-3 bg-black text-white p-4 rounded-lg"
+          >
             Musik untuk Belajar
           </h2>
           <iframe
@@ -132,8 +147,12 @@
       </div>
 
       <!-- To-Do List -->
-      <section class="todo mt-8">
-        <h2 class="text-3xl font-semibold mb-4 text-blue-500">To-Do List</h2>
+      <section class="todo mt-5">
+        <h2
+          class="text-3xl font-semibold mb-4 bg-black text-white p-4 rounded-lg"
+        >
+          To-Do List
+        </h2>
         <div class="flex mb-4">
           <input
             type="text"

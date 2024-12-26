@@ -72,47 +72,40 @@ function updateDisplay() {
   );
 }
 
-function updateDisplay() {
-  const minutes = Math.floor(timeLeft / 60);
-  const seconds = timeLeft % 60;
-  document.getElementById("minutes").textContent = String(minutes).padStart(
-    2,
-    "0"
-  );
-  document.getElementById("seconds").textContent = String(seconds).padStart(
-    2,
-    "0"
-  );
-}
-
 // To-Do List
 function addTask() {
   const taskInput = document.getElementById("task-input");
+  const taskList = document.getElementById("task-list");
   const taskText = taskInput.value.trim();
 
-  if (taskText) {
+  if (taskText !== "") {
     const li = document.createElement("li");
-    li.textContent = taskText;
+    const span = document.createElement("span");
+    span.textContent = taskText;
+    li.appendChild(span);
 
-    const completeBtn = document.createElement("button");
-    completeBtn.textContent = "Selesai";
-    completeBtn.onclick = () => {
+    const selesaiButton = document.createElement("button");
+    selesaiButton.textContent = "Selesai";
+    selesaiButton.className =
+      "bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600";
+    selesaiButton.onclick = function () {
       li.classList.toggle("completed");
-    };
-
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Hapus";
-    deleteBtn.onclick = () => {
-      li.remove();
       saveTasks();
     };
+    li.appendChild(selesaiButton);
 
-    li.appendChild(completeBtn);
-    li.appendChild(deleteBtn);
+    const hapusButton = document.createElement("button");
+    hapusButton.textContent = "Hapus";
+    hapusButton.className =
+      "bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600";
+    hapusButton.onclick = function () {
+      taskList.removeChild(li);
+      saveTasks();
+    };
+    li.appendChild(hapusButton);
 
-    document.getElementById("task-list").appendChild(li);
+    taskList.appendChild(li);
     saveTasks();
-
     taskInput.value = "";
   }
 }
@@ -132,31 +125,36 @@ function loadTasks() {
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   tasks.forEach((task) => {
     const li = document.createElement("li");
-    li.textContent = task.text;
+    const span = document.createElement("span");
+    span.textContent = task.text;
+    li.appendChild(span);
+
     if (task.completed) li.classList.add("completed");
 
-    const completeBtn = document.createElement("button");
-    completeBtn.textContent = "Selesai";
-    completeBtn.onclick = () => {
+    const selesaiButton = document.createElement("button");
+    selesaiButton.textContent = "Selesai";
+    selesaiButton.className =
+      "bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600";
+    selesaiButton.onclick = function () {
       li.classList.toggle("completed");
       saveTasks();
     };
+    li.appendChild(selesaiButton);
 
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Hapus";
-    deleteBtn.onclick = () => {
-      li.remove();
+    const hapusButton = document.createElement("button");
+    hapusButton.textContent = "Hapus";
+    hapusButton.className =
+      "bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600";
+    hapusButton.onclick = function () {
+      taskList.removeChild(li);
       saveTasks();
     };
+    li.appendChild(hapusButton);
 
-    li.appendChild(completeBtn);
-    li.appendChild(deleteBtn);
-
-    document.getElementById("task-list").appendChild(li);
+    taskList.appendChild(li);
   });
 }
 
 window.onload = () => {
   loadTasks();
-  updateDisplay();
 };
