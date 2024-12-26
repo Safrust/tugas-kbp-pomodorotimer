@@ -72,44 +72,46 @@ function updateDisplay() {
   );
 }
 
-// To-Do List
+function taskCompleted(button) {
+  const li = button.parentElement.parentElement;
+  li.classList.toggle("completed");
+  saveTasks();
+}
+function taskDeleted(button) {
+  const li = button.parentElement.parentElement;
+  li.remove();
+  saveTasks();
+}
 function addTask() {
   const taskInput = document.getElementById("task-input");
   const taskList = document.getElementById("task-list");
   const taskText = taskInput.value.trim();
-
   if (taskText !== "") {
     const li = document.createElement("li");
     const span = document.createElement("span");
     span.textContent = taskText;
     li.appendChild(span);
-
     const selesaiButton = document.createElement("button");
     selesaiButton.textContent = "Selesai";
     selesaiButton.className =
-      "bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600";
+      "bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-red-600";
     selesaiButton.onclick = function () {
-      li.classList.toggle("completed");
-      saveTasks();
+      taskCompleted(selesaiButton);
     };
     li.appendChild(selesaiButton);
-
     const hapusButton = document.createElement("button");
     hapusButton.textContent = "Hapus";
     hapusButton.className =
       "bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600";
     hapusButton.onclick = function () {
-      taskList.removeChild(li);
-      saveTasks();
+      taskDeleted(hapusButton);
     };
     li.appendChild(hapusButton);
-
     taskList.appendChild(li);
     saveTasks();
     taskInput.value = "";
   }
 }
-
 function saveTasks() {
   const tasks = [];
   document.querySelectorAll("#task-list li").forEach((li) => {
@@ -120,41 +122,34 @@ function saveTasks() {
   });
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
-
 function loadTasks() {
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  const taskList = document.getElementById("task-list");
   tasks.forEach((task) => {
     const li = document.createElement("li");
     const span = document.createElement("span");
     span.textContent = task.text;
     li.appendChild(span);
-
     if (task.completed) li.classList.add("completed");
-
     const selesaiButton = document.createElement("button");
     selesaiButton.textContent = "Selesai";
     selesaiButton.className =
-      "bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600";
+      "bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-red-600";
     selesaiButton.onclick = function () {
-      li.classList.toggle("completed");
-      saveTasks();
+      taskCompleted(selesaiButton);
     };
     li.appendChild(selesaiButton);
-
     const hapusButton = document.createElement("button");
     hapusButton.textContent = "Hapus";
     hapusButton.className =
       "bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600";
     hapusButton.onclick = function () {
-      taskList.removeChild(li);
-      saveTasks();
+      taskDeleted(hapusButton);
     };
     li.appendChild(hapusButton);
-
     taskList.appendChild(li);
   });
 }
-
 window.onload = () => {
   loadTasks();
 };
