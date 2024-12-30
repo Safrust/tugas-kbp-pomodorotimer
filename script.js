@@ -2,9 +2,11 @@
 let timer;
 let isRunning = false;
 let isStudyTime = true;
-let studyTime = 25 * 60; // default 25 minutes
-let breakTime = 5 * 60; // default 5 minutes
+let studyTime = 25 * 60;
+let breakTime = 5 * 60;
 let timeLeft = studyTime;
+let totalStudyTime = 0;
+let totalStudySessions = 0;
 
 function startTimer() {
   if (!isRunning) {
@@ -42,6 +44,11 @@ function updateTimer() {
           ? "Waktu belajar selesai! Istirahat sebentar."
           : "Waktu istirahat selesai! Kembali belajar."
       );
+      if (isStudyTime) {
+        totalStudyTime += studyTime / 60;
+        totalStudySessions++;
+        updateStudyStats();
+      }
       isStudyTime = !isStudyTime;
       timeLeft = isStudyTime ? studyTime : breakTime;
       updateDisplay();
@@ -60,6 +67,12 @@ function updateDisplay() {
     2,
     "0"
   );
+}
+
+function updateStudyStats() {
+  document.getElementById("total-study-time").textContent = totalStudyTime;
+  document.getElementById("total-study-sessions").textContent =
+    totalStudySessions;
 }
 
 // To-Do List
@@ -122,7 +135,7 @@ function saveTasks() {
 function loadTasks() {
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   const taskList = document.getElementById("task-list");
-  taskList.innerHTML = ""; // Clear existing tasks to avoid duplication
+  taskList.innerHTML = "";
   tasks.forEach((task) => {
     const li = document.createElement("li");
     li.classList.add("task-item");
@@ -141,5 +154,19 @@ function loadTasks() {
   });
 }
 
-// Initialize
+// Inisialisasi saat dokumen siap
 document.addEventListener("DOMContentLoaded", loadTasks);
+
+// Motivasi Belajar
+const quotes = [
+  '"Education is the passport to the future, for tomorrow belongs to those who prepare for it today." - Malcolm X',
+  '"The more that you read, the more things you will know. The more that you learn, the more places you’ll go." - Dr. Seuss',
+  '"The beautiful thing about learning is that no one can take it away from you." - B.B. King',
+  '"Live as if you were to die tomorrow. Learn as if you were to live forever." - Mahatma Gandhi',
+  '"Success is not the key to happiness. Happiness is the key to success. If you love what you are doing, you will be successful." - Albert Schweitzer',
+];
+
+function generateQuote() {
+  const randomIndex = Math.floor(Math.random() * quotes.length);
+  document.getElementById("quote").textContent = quotes[randomIndex];
+}

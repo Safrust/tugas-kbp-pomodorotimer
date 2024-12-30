@@ -18,11 +18,8 @@
       >
         Website Pendukung Kegiatan Belajar
       </h1>
-
       <audio id="alarm-sound" src="alarm.mp3" preload="auto"></audio>
-
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Pomodoro Timer -->
         <section class="pomodoro col-span-2 mb-8">
           <h2
             style="font-family: 'Comic Sans MS'"
@@ -85,10 +82,22 @@
                 </button>
               </div>
             </div>
+            <div
+              style="font-family: 'Comic Sans MS'"
+              class="study-stats bg-white p-6 mt-4 rounded-lg shadow-md"
+            >
+              <h3 class="text-2xl font-semibold text-center mb-3">
+                Statistik Waktu Belajar
+              </h3>
+              <p>
+                Total Waktu Belajar: <span id="total-study-time">0</span> menit
+              </p>
+              <p>
+                Total Sesi Belajar: <span id="total-study-sessions">0</span>
+              </p>
+            </div>
           </div>
         </section>
-
-        <!-- Spotify Embed -->
         <section class="spotify mb-8 lg:mb-0">
           <h2
             style="font-family: 'Comic Sans MS'"
@@ -122,8 +131,6 @@
           </div>
         </section>
       </div>
-
-      <!-- To-Do List -->
       <section class="todo mt-5">
         <h2
           class="text-3xl font-semibold mb-4 bg-black text-white p-4 rounded-lg"
@@ -145,6 +152,27 @@
           </button>
         </div>
         <ul id="task-list" class="list-disc pl-5"></ul>
+      </section>
+      <section class="motivation mt-5">
+        <h2
+          class="text-3xl font-semibold mb-4 bg-black text-white p-4 rounded-lg"
+        >
+          Motivasi Belajar
+        </h2>
+        <div
+          class="motivational-quote text-center p-6 bg-gray-100 rounded-lg shadow-md"
+        >
+          <p id="quote" class="text-xl italic">
+            "Education is the passport to the future, for tomorrow belongs to
+            those who prepare for it today." - Malcolm X
+          </p>
+          <button
+            class="bg-blue-500 text-white px-6 py-3 rounded-full mt-4 hover:bg-blue-600"
+            onclick="generateQuote()"
+          >
+            Berikan Motivasi Lain
+          </button>
+        </div>
       </section>
     </div>
     <script src="script.js"></script>
