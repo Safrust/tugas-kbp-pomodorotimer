@@ -87,10 +87,17 @@ function toggleTaskCompleted(button) {
   const li = button.closest("li");
   li.classList.toggle("completed");
   const span = li.querySelector("span");
+
   if (li.classList.contains("completed")) {
     span.style.color = "green";
+    button.textContent = "Selesai ✔";
+    button.classList.remove("bg-blue-500", "hover:bg-blue-600");
+    button.classList.add("bg-green-500", "hover:bg-green-600");
   } else {
     span.style.color = "";
+    button.textContent = "Selesai";
+    button.classList.remove("bg-green-500", "hover:bg-green-600");
+    button.classList.add("bg-blue-500", "hover:bg-blue-600");
   }
   saveTasks();
 }
